@@ -1,0 +1,6 @@
+- [ ] climb terrain is too sparse
+- [x] camera mount collision termination
+- [ ] if rnn bptt can be replace by rssm
+- [ ] rl + bc for teacher student distillation; add rl optional for z rl distillation algo: 
+    - warmup -> il -> il+rl -> rl
+- [x] penalize high torque and high speed
