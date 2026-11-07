@@ -125,8 +125,9 @@ class resample_exterio_latent_mask(ManagerTermBase):
             sensor.set_heightmap_blind_mask(env._exterio_latent_mask <= 0.0)
 
 
-def _selected_env_ids(env: ManagerBasedEnv, env_ids: torch.Tensor | None) -> torch.Tensor:
-    if env_ids is None:
-        return torch.arange(env.num_envs, device=env.device)
+def _selected_env_ids(env: ManagerBasedEnv, env_ids: torch.Tensor | slice | None) -> torch.Tensor:
+    if env_ids is None or isinstance(env_ids, slice):
+        ids = torch.arange(env.num_envs, device=env.device)
+        return ids if env_ids is None else ids[env_ids]
     return torch.as_tensor(env_ids, device=env.device, dtype=torch.long)
 

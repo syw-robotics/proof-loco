@@ -107,7 +107,7 @@ class ProofGateLatent(nn.Module):
         mu_dim = spec.rnn_hidden_dim
         cnn_dim = spec._cnn_latent_dim
         self.prop_normalizer = EmpiricalNormalization(prop_dim)
-        self.rnn = RNN(prop_latent_dim + cnn_dim, mu_dim, num_layers=spec.rnn_num_layers, type="gru")
+        self.rnn = self._make_memory(prop_latent_dim + cnn_dim, mu_dim)
         self.log_var_head = MLP(
             mu_dim + cnn_dim + prop_latent_dim,
             mu_dim,
@@ -130,6 +130,9 @@ class ProofGateLatent(nn.Module):
         self._last_raw_gate: torch.Tensor | None = None
         self._last_gate: torch.Tensor | None = None
         self._gate_open: torch.Tensor | None = None
+
+    def _make_memory(self, input_dim: int, output_dim: int) -> nn.Module:
+        return RNN(input_dim, output_dim, num_layers=self.spec.rnn_num_layers, type="gru")
 
     @property
     def cnn(self) -> nn.Module:

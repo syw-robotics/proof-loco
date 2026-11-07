@@ -73,3 +73,6 @@ tests/
 # TacSL sensor
 **/tactile_record/*
 **/gelsight_r15_data/*
+
+# LocoLab kitless asset conversion cache
+**/.locolab_usd_cache/

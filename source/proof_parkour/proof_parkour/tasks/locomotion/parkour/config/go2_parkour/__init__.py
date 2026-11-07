@@ -40,3 +40,12 @@ register_manager_based_rl_env(
         "z_rl_cfg_entry_point": f"{agents.__name__}.z_rl_proof_distillation_cfg:ProofVisionParkourDistillationRunnerCfg",
     },
 )
+
+register_manager_based_rl_env(
+    task_id="Proof-Vision-RSSM-Parkour-Distill-Go2",
+    env_cfg_module="proof_parkour.tasks.locomotion.parkour.config.proof_vision_parkour_env_cfg",
+    env_cfg_name="ProofVisionParkourGo2EnvCfg",
+    agent_cfg_entry_points={
+        "z_rl_cfg_entry_point": f"{agents.__name__}.z_rl_proof_rssm_distillation_cfg:ProofRSSMVisionParkourDistillationRunnerCfg",
+    },
+)

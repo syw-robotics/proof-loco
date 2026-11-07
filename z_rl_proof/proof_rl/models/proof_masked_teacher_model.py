@@ -57,7 +57,7 @@ class ProofMaskedTeacherEncoderModel(GroupMLPEncoderModel):
     """PROOF heightmap teacher.
 
     Same encoders, normalizers, and last-frame append as ``GroupMLPEncoderModel``.
-    The only extra step is multiplying the heightmap latent by ``mask_obs_group``.
+    The heightmap latent passes through tanh before multiplication by ``mask_obs_group``.
     """
 
     latent_spec_class = ProofMaskedTeacherLatentSpec
@@ -67,7 +67,7 @@ class ProofMaskedTeacherEncoderModel(GroupMLPEncoderModel):
 
 
 class ProofMaskedTeacherLatent(nn.Module):
-    """GroupMLP prop and heightmap latents, with the heightmap latent multiplied by the mask."""
+    """GroupMLP latents, with the tanh-bounded heightmap latent multiplied by the mask."""
 
     def __init__(
         self,
@@ -104,7 +104,7 @@ class ProofMaskedTeacherLatent(nn.Module):
             (
                 self.adapter.encoders[self.prop_group](prop),
                 self.adapter.append_obs.select(prop),
-                self.adapter.encoders[self.heightmap_group](heightmap) * mask,
+                torch.tanh(self.adapter.encoders[self.heightmap_group](heightmap)) * mask,
             ),
             dim=-1,
         )

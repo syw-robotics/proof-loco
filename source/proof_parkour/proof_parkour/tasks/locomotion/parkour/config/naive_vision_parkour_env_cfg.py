@@ -13,7 +13,7 @@ from isaaclab.sensors import patterns
 from isaaclab.utils import configclass
 from isaaclab.utils.math import quat_from_euler_xyz
 from locolab.assets.sensors.noisy_camera import NoisyRayCasterCameraCfg
-from locolab.utils.markers import YELLOW_RAY_CASTER_MARKER_CFG
+from locolab.utils.debug_viz.markers import YELLOW_RAY_CASTER_MARKER_CFG
 from locolab.utils.noise import (
     CropAndResizeCfg,
     DepthArtifactNoiseCfg,
@@ -78,6 +78,7 @@ def noisy_depth_camera(*, depth_corruption: bool = False) -> NoisyRayCasterCamer
     return NoisyRayCasterCameraCfg(
         prim_path="{ENV_REGEX_NS}/Robot/base",
         mesh_prim_paths=["/World/ground"],
+        global_world_only=True,
         offset=NoisyRayCasterCameraCfg.OffsetCfg(
             pos=(0.335, 0.015, 0.088),  # 30 deg D435 mount
             # World convention: +X forward, +Z up. Ray directions already use this frame.

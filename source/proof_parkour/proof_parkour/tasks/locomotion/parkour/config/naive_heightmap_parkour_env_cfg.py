@@ -17,6 +17,7 @@ from locolab.assets.sensors.volume_points import (
     Grid3dPointsGeneratorCfg,
     VolumePointsCfg,
 )
+from locolab.utils.physics import set_locomotion_physics, set_self_collisions
 from locolab.utils.scene import blue_sky_light_cfg, rough_terrain_visual_material_cfg
 from locolab.utils.terrains import (
     GreedyconcatEdgeCylinderCfg,
@@ -24,7 +25,7 @@ from locolab.utils.terrains import (
 )
 from proof_parkour.assets import UNITREE_GO2_D435_CFG  # isort: skip
 from proof_parkour.utils.terrains.terrains_cfg import PARKOUR_TERRAINS_CFG, ROUGH_TERRAINS_CFG  # isort: skip
-from locolab.utils.markers import BLUE_RAY_CASTER_MARKER_CFG, PURPLE_RAY_CASTER_MARKER_CFG  # isort: skip
+from locolab.utils.debug_viz.markers import BLUE_RAY_CASTER_MARKER_CFG, PURPLE_RAY_CASTER_MARKER_CFG  # isort: skip
 
 
 from .go2_parkour.mdp_cfg import (
@@ -105,6 +106,7 @@ class Go2ParkourSceneCfg(InteractiveSceneCfg):
         #  pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
         debug_vis=False,
         mesh_prim_paths=["/World/ground"],
+        global_world_only=True,
         visualizer_cfg=BLUE_RAY_CASTER_MARKER_CFG,
     )
     FL_foot_height_scanner = RayCasterCfg(
@@ -114,6 +116,7 @@ class Go2ParkourSceneCfg(InteractiveSceneCfg):
         pattern_cfg=patterns.GridPatternCfg(resolution=0.03, size=[0.03, 0.03]),
         debug_vis=False,
         mesh_prim_paths=["/World/ground"],
+        global_world_only=True,
         visualizer_cfg=PURPLE_RAY_CASTER_MARKER_CFG,
     )
     FR_foot_height_scanner = RayCasterCfg(
@@ -123,6 +126,7 @@ class Go2ParkourSceneCfg(InteractiveSceneCfg):
         pattern_cfg=patterns.GridPatternCfg(resolution=0.03, size=[0.03, 0.03]),
         debug_vis=False,
         mesh_prim_paths=["/World/ground"],
+        global_world_only=True,
         visualizer_cfg=PURPLE_RAY_CASTER_MARKER_CFG,
     )
     RL_foot_height_scanner = RayCasterCfg(
@@ -132,6 +136,7 @@ class Go2ParkourSceneCfg(InteractiveSceneCfg):
         pattern_cfg=patterns.GridPatternCfg(resolution=0.03, size=[0.03, 0.03]),
         debug_vis=False,
         mesh_prim_paths=["/World/ground"],
+        global_world_only=True,
         visualizer_cfg=PURPLE_RAY_CASTER_MARKER_CFG,
     )
     RR_foot_height_scanner = RayCasterCfg(
@@ -141,6 +146,7 @@ class Go2ParkourSceneCfg(InteractiveSceneCfg):
         pattern_cfg=patterns.GridPatternCfg(resolution=0.03, size=[0.03, 0.03]),
         debug_vis=False,
         mesh_prim_paths=["/World/ground"],
+        global_world_only=True,
         visualizer_cfg=PURPLE_RAY_CASTER_MARKER_CFG,
     )
     contact_forces: ContactSensorCfg = ContactSensorCfg(
@@ -189,9 +195,7 @@ class NaiveHeightmapParkourGo2EnvCfg(ManagerBasedRLEnvCfg):
         self.sim.dt = 0.005
         self.sim.render_interval = self.decimation
         self.sim.physics_material = self.scene.terrain.physics_material
-        self.sim.physx.gpu_max_rigid_patch_count = 10 * 2**15
-        #  self.sim.physx.gpu_max_rigid_patch_count = 2**16
-        #  self.sim.physx.gpu_max_rigid_patch_count = 2**15
+        set_locomotion_physics(self.sim, rigid_patch_count=10 * 2**15)
         # update sensor update periods
         # we tick all the sensors based on the smallest update period (physics update period)
         self.scene.contact_forces.update_period = self.sim.dt
@@ -206,7 +210,7 @@ class NaiveHeightmapParkourGo2EnvCfg(ManagerBasedRLEnvCfg):
         if self.scene.RR_foot_height_scanner is not None:
             self.scene.RL_foot_height_scanner.update_period = self.decimation * self.sim.dt
         # disable self collisions for rough terrain
-        self.scene.robot.spawn.articulation_props.enabled_self_collisions = True
+        set_self_collisions(self.scene.robot.spawn, True)
         # start from the easiest terrain level for training
         self.scene.terrain.max_init_terrain_level = 0
 

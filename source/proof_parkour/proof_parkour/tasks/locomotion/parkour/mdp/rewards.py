@@ -68,18 +68,18 @@ def flat_orientation_l2_when_parkour(
 
 
 @torch.jit.script
-def _cheat_penalty(quat_wxyz: torch.Tensor, is_parkour: torch.Tensor, tan_limit: float) -> torch.Tensor:
+def _cheat_penalty(quat_xyzw: torch.Tensor, is_parkour: torch.Tensor, tan_limit: float) -> torch.Tensor:
     """1 on parkour envs whose body +x yaw leaves the forward cone.
 
     ``tan_limit`` is ``tan(limit_angle)`` for ``limit_angle`` in ``(0, pi/2)``.
     In that range ``|atan2(fy, fx)| > limit`` is ``|fy| > fx * tan(limit)``,
     which also keeps ``atan2(0, 0) == 0`` from counting as a penalty.
-    Body +x from a ``(w, x, y, z)`` quaternion is ``(1 - 2(y^2 + z^2), 2(xy + wz))``.
+    Body +x from a ``(x, y, z, w)`` quaternion is ``(1 - 2(y^2 + z^2), 2(xy + wz))``.
     """
-    qw = quat_wxyz[:, 0]
-    qx = quat_wxyz[:, 1]
-    qy = quat_wxyz[:, 2]
-    qz = quat_wxyz[:, 3]
+    qx = quat_xyzw[:, 0]
+    qy = quat_xyzw[:, 1]
+    qz = quat_xyzw[:, 2]
+    qw = quat_xyzw[:, 3]
     forward_x = 1.0 - 2.0 * (qy * qy + qz * qz)
     forward_y = 2.0 * (qx * qy + qw * qz)
     cheat = forward_y.abs() > forward_x * tan_limit
@@ -100,7 +100,7 @@ def cheat(
     """
     asset: RigidObject = env.scene[asset_cfg.name]
     is_parkour_terrain = _get_cached_reward_terrain_mask(env, parkour_terrains, "parkour_terrains")
-    return _cheat_penalty(asset.data.root_quat_w, is_parkour_terrain, math.tan(limit_angle))
+    return _cheat_penalty(asset.data.root_quat_w.torch, is_parkour_terrain, math.tan(limit_angle))
 
 
 class joint_torques_l2_soft_limit(ManagerTermBase):

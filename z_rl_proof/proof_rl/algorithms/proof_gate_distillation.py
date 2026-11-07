@@ -1,6 +1,6 @@
 """Distill a PROOF depth student with a variance net and a mask gate.
 
-``mu`` is fit by MSE to the teacher's masked heightmap latent. Gaussian NLL
+``mu`` is fit by MSE to the teacher's tanh-bounded, masked heightmap latent. Gaussian NLL
 receives a detached ``mu`` and trains only the variance net. Gate BCE trains
 only the gate. The action loss is MSE on the deterministic head output.
 """
@@ -183,7 +183,7 @@ class ProofGateDistillation(Distillation):
             mask = observations[self.teacher_mask_obs_group].to(dtype=height.dtype)
             if mask.ndim == 1:
                 mask = mask.unsqueeze(-1)
-            teacher_exterio_latent = height * mask
+            teacher_exterio_latent = torch.tanh(height) * mask
         adapter = self._raw_student.latent_adapter
         mu = adapter.last_exterio_latent_mu
         log_var = adapter.last_exterio_latent_log_var

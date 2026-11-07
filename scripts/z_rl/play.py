@@ -5,12 +5,12 @@
 
 """Script to play a checkpoint if an RL agent from Z-RL."""
 
-"""Launch Isaac Sim Simulator first."""
-
 import argparse
 import sys
 
-from isaaclab.app import AppLauncher
+from isaaclab.app import add_launcher_args, launch_simulation
+from isaaclab.envs.utils.video_recorder_cfg import VideoRecorderCfg
+from locolab.utils.viewer import add_play_viewer_args, open_play_viewer, prepare_play_viewer
 
 # local imports
 import cli_args  # isort: skip
@@ -35,7 +35,10 @@ parser.add_argument(
     action="store_true",
     help="Use the pre-trained checkpoint from Nucleus.",
 )
-parser.add_argument("--real-time", action="store_true", default=False, help="Run in real-time, if possible.")
+parser.add_argument(
+    "--real-time", "--realtime", dest="real_time", action="store_true", default=False,
+    help="Run in real-time, if possible.",
+)
 parser.add_argument(
     "--inspect_joint_torque",
     type=float,
@@ -63,24 +66,17 @@ parser.add_argument(
 
 # append Z-RL cli arguments
 cli_args.add_z_rl_args(parser)
-# append AppLauncher cli args
-AppLauncher.add_app_launcher_args(parser)
+# append simulation and viewer CLI args
+add_play_viewer_args(parser)
+add_launcher_args(parser)
+from isaaclab_tasks.utils.hydra import setup_preset_cli
 # parse the arguments
-args_cli, hydra_args = parser.parse_known_args()
+args_cli, hydra_args = setup_preset_cli(parser)
 if args_cli.task is not None and not args_cli.task.endswith("-Play"):
     args_cli.task = f"{args_cli.task}-Play"
     print(f"[INFO] Using play task: {args_cli.task}")
-# always enable cameras to record video
-if args_cli.video:
-    args_cli.enable_cameras = True
-
 # clear out sys.argv for Hydra
 sys.argv = [sys.argv[0]] + hydra_args
-
-# launch omniverse app
-app_launcher = AppLauncher(args_cli)
-simulation_app = app_launcher.app
-
 
 """Rest everything follows."""
 
@@ -92,9 +88,7 @@ import torch
 from z_rl.runners import DistillationRunner, OnPolicyRunner
 from z_rl.utils.onnx_export import export_to_onnx
 
-from isaaclab.envs import ManagerBasedRLEnvCfg
 from isaaclab.utils.assets import retrieve_file_path
-from isaaclab.utils.dict import print_dict
 
 from z_rl.adaptor.isaaclab import ZRlBaseRunnerCfg, ZRlVecEnvWrapper
 from isaaclab_rl.utils.pretrained_checkpoint import get_published_pretrained_checkpoint
@@ -102,12 +96,12 @@ from isaaclab_rl.utils.pretrained_checkpoint import get_published_pretrained_che
 import locolab.tasks  # noqa: F401
 from proof_parkour.utils.joint_torque_inspector import JointTorqueInspector
 from isaaclab_tasks.utils import get_checkpoint_path
-from isaaclab_tasks.utils.hydra import hydra_task_config
+from isaaclab_tasks.utils.hydra import resolve_task_config
 
 
-@hydra_task_config(args_cli.task, args_cli.agent)
-def main(env_cfg: ManagerBasedRLEnvCfg, agent_cfg: ZRlBaseRunnerCfg):
+def main():
     """Play with Z-RL agent."""
+    env_cfg, agent_cfg = resolve_task_config(args_cli.task, args_cli.agent, overrides=hydra_args)
     # grab task name for checkpoint path
     task_name = args_cli.task.split(":")[-1]
     train_task_name = task_name.replace("-Play", "")
@@ -183,21 +177,22 @@ def main(env_cfg: ManagerBasedRLEnvCfg, agent_cfg: ZRlBaseRunnerCfg):
     # set the log directory for the environment (works for all environment types)
     env_cfg.log_dir = log_dir
 
-    # create isaac environment
-    env = gym.make(args_cli.task, cfg=env_cfg, render_mode="rgb_array" if args_cli.video else None)
-
-    # wrap for video recording
+    prepare_play_viewer(args_cli, env_cfg)
     if args_cli.video:
-        video_kwargs = {
-            "video_folder": os.path.join(log_dir, "videos", "play"),
-            "step_trigger": lambda step: step == 0,
-            "video_length": args_cli.video_length,
-            "disable_logger": True,
-        }
-        print("[INFO] Recording videos during training.")
-        print_dict(video_kwargs, nesting=4)
-        env = gym.wrappers.RecordVideo(env, **video_kwargs)
+        env_cfg.video_recorders = [
+            VideoRecorderCfg(
+                source="viz",
+                output_dir=os.path.join(log_dir, "videos", "play"),
+                video_length=args_cli.video_length,
+                video_interval=0,
+            )
+        ]
+    with launch_simulation(env_cfg, args_cli):
+        _play(env_cfg, agent_cfg, resume_path, load_cfg)
 
+
+def _play(env_cfg, agent_cfg, resume_path, load_cfg):
+    env = gym.make(args_cli.task, cfg=env_cfg)
     # wrap around environment for z-rl
     env = ZRlVecEnvWrapper(env, clip_actions=agent_cfg.clip_actions)
 
@@ -257,23 +252,30 @@ def main(env_cfg: ManagerBasedRLEnvCfg, agent_cfg: ZRlBaseRunnerCfg):
     dt = env.unwrapped.step_dt
     torque_inspector = JointTorqueInspector.from_env(env, args_cli.inspect_joint_torque)
 
+    viewer = open_play_viewer(env, args_cli)
+
     # reset environment
     obs = env.get_observations()
     timestep = 0
     # simulate environment
     try:
-        while simulation_app.is_running():
+        while env.unwrapped.sim.is_running():
             start_time = time.time()
             # run everything in inference mode
             with torch.inference_mode():
-                # agent stepping
-                actions = policy(obs)
-                # env stepping
-                obs, _, dones, _ = env.step(actions)
-                # reset recurrent states for episodes that have terminated
-                policy.reset(dones)
-                if torque_inspector is not None:
-                    torque_inspector.update(dt)
+                if viewer.apply_reset(env, policy.reset):
+                    obs = env.get_observations()
+                if not viewer.paused:
+                    # agent stepping
+                    actions = policy(obs)
+                    # env stepping
+                    obs, _, dones, _ = env.step(actions)
+                    # reset recurrent states for episodes that have terminated
+                    policy.reset(dones)
+                    if torque_inspector is not None:
+                        torque_inspector.update(dt)
+            if viewer.after_step():
+                continue
 
             # -------------------- Print Data for Debugging --------------------
             # example:
@@ -294,11 +296,12 @@ def main(env_cfg: ManagerBasedRLEnvCfg, agent_cfg: ZRlBaseRunnerCfg):
 
             # time delay for real-time evaluation
             sleep_time = dt - (time.time() - start_time)
-            if args_cli.real_time and sleep_time > 0:
+            if args_cli.real_time and not viewer.paces and sleep_time > 0:
                 time.sleep(sleep_time)
     finally:
         if torque_inspector is not None:
             torque_inspector.report_final()
+        viewer.close()
         # close the simulator
         env.close()
 
@@ -306,5 +309,3 @@ def main(env_cfg: ManagerBasedRLEnvCfg, agent_cfg: ZRlBaseRunnerCfg):
 if __name__ == "__main__":
     # run the main function
     main()
-    # close sim app
-    simulation_app.close()
