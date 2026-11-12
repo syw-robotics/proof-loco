@@ -94,6 +94,18 @@ class ProofGateStudentLatentSpecCfg:
     """Projection from flattened CNN features to the 64-dimensional CNN latent."""
 
 
+# @configclass
+# class ProofRSSMStudentLatentSpecCfg(ProofGateStudentLatentSpecCfg):
+#     """RSSM memory; inherited ``rnn_hidden_dim`` is the terrain output width.
+#
+#     ``rnn_num_layers`` applies only to the original GRU student. RSSM uses one
+#     transition cell, with sizes set by ``rssm_cfg``.
+#     """
+#
+#     class_name: str = "proof_rl.models.proof_rssm_student_model:ProofRSSMStudentLatentSpec"
+#     rssm_cfg: dict = {"deter_dim": 128, "stoch_dim": 32, "hidden_dim": 128}
+
+
 @configclass
 class ProofGateDistillationAlgorithmCfg(ZRlDistillationAlgorithmCfg):
     """MSE action fit plus the variance-net and gate losses."""

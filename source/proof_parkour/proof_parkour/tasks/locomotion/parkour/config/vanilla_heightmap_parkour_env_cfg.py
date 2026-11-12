@@ -1,4 +1,4 @@
-"""Naive heightmap parkour environment.
+"""Vanilla heightmap parkour environment.
 
 The actor reads ``prop`` and ``heightmap`` directly. The PROOF heightmap task
 subclasses the scene and environment defined here.
@@ -50,7 +50,7 @@ PRETRAIN_TERRAIN = False
 # MDP definition
 ##
 @configclass
-class NaiveHeightmapObservationsCfg:
+class VanillaHeightmapObservationsCfg:
     prop: PropObsCfg = PropObsCfg()
     priv: PrivObsCfg = PrivObsCfg()
     heightmap: HeightmapObsCfg = HeightmapObsCfg()
@@ -174,11 +174,11 @@ class Go2ParkourSceneCfg(InteractiveSceneCfg):
 
 
 @configclass
-class NaiveHeightmapParkourGo2EnvCfg(ManagerBasedRLEnvCfg):
+class VanillaHeightmapParkourGo2EnvCfg(ManagerBasedRLEnvCfg):
     """Go2 parkour whose actor consumes the height scan directly."""
 
     scene: Go2ParkourSceneCfg = Go2ParkourSceneCfg(num_envs=4096, env_spacing=2.5)
-    observations: NaiveHeightmapObservationsCfg = NaiveHeightmapObservationsCfg()
+    observations: VanillaHeightmapObservationsCfg = VanillaHeightmapObservationsCfg()
     actions: ActionsCfg = ActionsCfg()
     commands: ParkourCommandsCfg = ParkourCommandsCfg()
     rewards: ParkourRewardsCfg = ParkourRewardsCfg()
@@ -259,7 +259,7 @@ class NaiveHeightmapParkourGo2EnvCfg(ManagerBasedRLEnvCfg):
 
 
 @configclass
-class NaiveHeightmapParkourGo2EnvCfg_PLAY(NaiveHeightmapParkourGo2EnvCfg):
+class VanillaHeightmapParkourGo2EnvCfg_PLAY(VanillaHeightmapParkourGo2EnvCfg):
     def __post_init__(self) -> None:
         super().__post_init__()
         self.apply_play_overrides()

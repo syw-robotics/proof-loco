@@ -6,7 +6,7 @@ from z_rl.algorithms.distillation import Distillation
 from z_rl.utils.checkpoint import module_state_dict_from_checkpoint
 
 
-class NaiveStudentDistillation(Distillation):
+class VanillaStudentDistillation(Distillation):
     """Load an RL teacher, then copy its head and prop encoder into the student.
 
     A distillation checkpoint still loads the student as usual. ``warmup_iters`` keeps the
@@ -45,7 +45,7 @@ class NaiveStudentDistillation(Distillation):
         prop_encoder = student.latent_adapter.encoders[student.latent_spec.prop_obs_group]
 
         if self.frozen_prop_encoder:
-            print("[NaiveStudentDistillation] prop encoder stays fixed.")
+            print("[VanillaStudentDistillation] prop encoder stays fixed.")
             for param in prop_encoder.parameters():
                 param.requires_grad_(False)
 
@@ -53,7 +53,7 @@ class NaiveStudentDistillation(Distillation):
             for param in student.head.parameters():
                 param.requires_grad_(False)
             print(
-                "[NaiveStudentDistillation] warmup for "
+                "[VanillaStudentDistillation] warmup for "
                 f"{self.warmup_iters} iterations keeps the prop encoder and head fixed."
             )
 
@@ -99,7 +99,7 @@ class NaiveStudentDistillation(Distillation):
                     {key[len(prefix) :]: value for key, value in state.items() if key.startswith(prefix)},
                     strict=True,
                 )
-            print("[NaiveStudentDistillation] initialized head and prop encoder from teacher.")
+            print("[VanillaStudentDistillation] initialized head and prop encoder from teacher.")
         elif loaded_iteration:
             self.num_updates = int(loaded_dict["num_updates"] if "num_updates" in loaded_dict else loaded_dict["iter"] + 1)
 

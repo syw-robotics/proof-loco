@@ -1,6 +1,6 @@
 """PROOF vision student environment.
 
-Inherits the naive vision scene and MDP, then adds depth corruption. While that
+Inherits the vanilla vision scene and MDP, then adds depth corruption. While that
 corruption is active, ``depth_corrupt`` is 0, so the heightmap teacher walks blind.
 The student reads ``prop`` and ``depth_image``. The teacher still reads ``prop``,
 ``heightmap``, and ``depth_corrupt``.
@@ -18,10 +18,10 @@ from proof_parkour.assets.sensors import (
 )
 
 from .go2_parkour.mdp_cfg import DepthCorruptionMaskObsCfg, VisionEventCfg
-from .naive_vision_parkour_env_cfg import (
-    NaiveVisionObservationsCfg,
-    NaiveVisionParkourGo2EnvCfg,
-    NaiveVisionParkourSceneCfg,
+from .vanilla_vision_parkour_env_cfg import (
+    VanillaVisionObservationsCfg,
+    VanillaVisionParkourGo2EnvCfg,
+    VanillaVisionParkourSceneCfg,
     noisy_depth_camera,
 )
 
@@ -30,8 +30,8 @@ from .naive_vision_parkour_env_cfg import (
 # MDP definition
 ##
 @configclass
-class ProofVisionObservationsCfg(NaiveVisionObservationsCfg):
-    """Naive vision observations plus the exterio mask driven by depth corruption."""
+class ProofVisionObservationsCfg(VanillaVisionObservationsCfg):
+    """Vanilla vision observations plus the exterio mask driven by depth corruption."""
 
     depth_corrupt: DepthCorruptionMaskObsCfg = DepthCorruptionMaskObsCfg()
 
@@ -40,10 +40,10 @@ class ProofVisionObservationsCfg(NaiveVisionObservationsCfg):
 # Scene definition
 ##
 @configclass
-class ProofVisionParkourSceneCfg(NaiveVisionParkourSceneCfg):
-    """Naive depth scene plus depth corruption; masked/corrupted envs show red markers."""
+class ProofVisionParkourSceneCfg(VanillaVisionParkourSceneCfg):
+    """Vanilla depth scene plus depth corruption; masked/corrupted envs show red markers."""
 
-    height_scanner: RayCasterCfg = NaiveVisionParkourSceneCfg().height_scanner.replace(
+    height_scanner: RayCasterCfg = VanillaVisionParkourSceneCfg().height_scanner.replace(
         class_type=BlindHeightmapRayCaster,
         visualizer_cfg=BLIND_HEIGHT_SCAN_RAY_CASTER_MARKER_CFG,
     )
@@ -57,7 +57,7 @@ class ProofVisionParkourSceneCfg(NaiveVisionParkourSceneCfg):
 # Environment configuration
 ##
 @configclass
-class ProofVisionParkourGo2EnvCfg(NaiveVisionParkourGo2EnvCfg):
+class ProofVisionParkourGo2EnvCfg(VanillaVisionParkourGo2EnvCfg):
     """PROOF vision student environment.
 
     The student reads ``prop`` and the preprocessed ``depth_image``. The teacher still

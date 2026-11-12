@@ -4,16 +4,17 @@ from z_rl.adaptor.isaaclab import ZRlGroupMLPEncoderModelCfg, ZRlMLPModelCfg, ZR
 
 
 @configclass
-class NaiveHeightmapParkourPPORunnerCfg(ZRlOnPolicyRunnerCfg):
+class VanillaHeightmapParkourPPORunnerCfg(ZRlOnPolicyRunnerCfg):
     num_steps_per_env = 24
     max_iterations = 10000
     save_interval = 500
-    experiment_name = "parkour_naive_heightmap"
+    experiment_name = "parkour_vanilla_heightmap"
     obs_groups = {
         "actor": ["prop", "heightmap"],
         "critic": ["priv", "heightmap"],
     }
     actor = ZRlGroupMLPEncoderModelCfg(
+        class_name="proof_rl.models.vanilla_teacher_model:VanillaTeacherEncoderModel",
         hidden_dims=[512, 256, 128],
         activation="elu",
         obs_normalization=True,

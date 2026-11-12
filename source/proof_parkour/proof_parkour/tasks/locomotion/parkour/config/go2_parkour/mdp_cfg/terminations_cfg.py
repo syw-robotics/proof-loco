@@ -19,11 +19,11 @@ class ParkourTerminationsCfg:
 
     # Only robots on the highest-difficulty row are terminated for leaving the map.
     # Marked as a timeout so leaving the terrain does not count as a failure.
-    #  terrain_out_of_bounds = DoneTerm(
-    #      func=mdp.terrain_out_of_bounds_at_max,
-    #      params={"asset_cfg": SceneEntityCfg("robot"), "distance_buffer": 3.0},
-    #      time_out=True,
-    #  )
+    terrain_out_of_bounds = DoneTerm(
+        func=mdp.terrain_out_of_bounds,
+        params={"asset_cfg": SceneEntityCfg("robot"), "distance_buffer": 3.0},
+        time_out=True,
+    )
 
     # terminate when contact happens on specified links
     illegal_contact = DoneTerm(

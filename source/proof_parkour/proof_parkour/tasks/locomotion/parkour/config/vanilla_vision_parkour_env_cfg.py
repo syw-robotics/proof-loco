@@ -1,6 +1,6 @@
-"""Naive vision student environment.
+"""Vanilla vision student environment.
 
-The scene is the naive heightmap parkour scene plus a depth camera. The camera
+The scene is the vanilla heightmap parkour scene plus a depth camera. The camera
 preprocessing matches the PROOF vision task except it has no depth corruption.
 The student reads ``prop`` and ``depth_image``. The teacher still reads ``prop``
 and ``heightmap``. The PROOF vision task subclasses this environment.
@@ -23,11 +23,11 @@ from locolab.utils.noise import (
     RandomSideMaskingCfg,
 )
 
-from .go2_parkour.mdp_cfg import NaiveVisionEventCfg, VisionObsCfg
-from .naive_heightmap_parkour_env_cfg import (
+from .go2_parkour.mdp_cfg import VanillaVisionEventCfg, VisionObsCfg
+from .vanilla_heightmap_parkour_env_cfg import (
     Go2ParkourSceneCfg,
-    NaiveHeightmapObservationsCfg,
-    NaiveHeightmapParkourGo2EnvCfg,
+    VanillaHeightmapObservationsCfg,
+    VanillaHeightmapParkourGo2EnvCfg,
 )
 
 
@@ -35,7 +35,7 @@ from .naive_heightmap_parkour_env_cfg import (
 # Shared Forward Go2 Depth Camera definition
 ##
 def noisy_depth_camera(*, depth_corruption: bool = False) -> NoisyRayCasterCameraCfg:
-    """Depth camera shared by the naive and PROOF vision students.
+    """Depth camera shared by the vanilla and PROOF vision students.
 
     ``depth_corruption`` adds the terrain-gated corruption stage used by PROOF.
     """
@@ -55,7 +55,7 @@ def noisy_depth_camera(*, depth_corruption: bool = False) -> NoisyRayCasterCamer
             sides=("left", "right"),
             width_range=(0, 8),
             start_probability=0.02,
-            duration_range=(2, 20),
+            duration_range=(2, 10),
             mask_value_choices=(0.0, 1.0),
         ),
     }
@@ -115,7 +115,7 @@ def noisy_depth_camera(*, depth_corruption: bool = False) -> NoisyRayCasterCamer
 # MDP definition
 ##
 @configclass
-class NaiveVisionObservationsCfg(NaiveHeightmapObservationsCfg):
+class VanillaVisionObservationsCfg(VanillaHeightmapObservationsCfg):
     """Heightmap observations plus the preprocessed depth history."""
 
     depth_image: VisionObsCfg = VisionObsCfg()
@@ -125,7 +125,7 @@ class NaiveVisionObservationsCfg(NaiveHeightmapObservationsCfg):
 # Scene definition
 ##
 @configclass
-class NaiveVisionParkourSceneCfg(Go2ParkourSceneCfg):
+class VanillaVisionParkourSceneCfg(Go2ParkourSceneCfg):
     """Parkour scene with a preprocessed pinhole depth camera on the base."""
 
     depth_camera: NoisyRayCasterCameraCfg = noisy_depth_camera(depth_corruption=False)
@@ -135,12 +135,12 @@ class NaiveVisionParkourSceneCfg(Go2ParkourSceneCfg):
 # Environment configuration
 ##
 @configclass
-class NaiveVisionParkourGo2EnvCfg(NaiveHeightmapParkourGo2EnvCfg):
+class VanillaVisionParkourGo2EnvCfg(VanillaHeightmapParkourGo2EnvCfg):
     """Go2 parkour student env. Depth comes from the preprocessed ray-cast camera."""
 
-    scene: NaiveVisionParkourSceneCfg = NaiveVisionParkourSceneCfg(num_envs=4096, env_spacing=2.5)
-    observations: NaiveVisionObservationsCfg = NaiveVisionObservationsCfg()
-    events: NaiveVisionEventCfg = NaiveVisionEventCfg()
+    scene: VanillaVisionParkourSceneCfg = VanillaVisionParkourSceneCfg(num_envs=4096, env_spacing=2.5)
+    observations: VanillaVisionObservationsCfg = VanillaVisionObservationsCfg()
+    events: VanillaVisionEventCfg = VanillaVisionEventCfg()
 
     def __post_init__(self):
         super().__post_init__()
@@ -161,7 +161,7 @@ class NaiveVisionParkourGo2EnvCfg(NaiveHeightmapParkourGo2EnvCfg):
 
 
 @configclass
-class NaiveVisionParkourGo2EnvCfg_PLAY(NaiveVisionParkourGo2EnvCfg):
+class VanillaVisionParkourGo2EnvCfg_PLAY(VanillaVisionParkourGo2EnvCfg):
     def __post_init__(self) -> None:
         super().__post_init__()
         self.apply_play_overrides()

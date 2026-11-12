@@ -1,4 +1,4 @@
-"""Naive depth student whose prop encoder and action head match the heightmap teacher."""
+"""Vanilla depth student whose prop encoder and action head match the heightmap teacher."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from z_rl.utils import resolve_obs_temporal_selector
 
 
 @dataclass
-class NaiveStudentLatentSpec(CNNLatentSpec):
+class VanillaStudentLatentSpec(CNNLatentSpec):
     """Teacher prop encoder, a depth CNN in the heightmap slot, then the last prop frame.
 
     The concatenated latent is ``[prop_encoder(prop), cnn(depth), last_prop]``. ``cnn`` output
@@ -56,10 +56,10 @@ class NaiveStudentLatentSpec(CNNLatentSpec):
         ).dim
 
 
-class NaiveStudentVisionModel(CNNModel):
+class VanillaStudentVisionModel(CNNModel):
     """CNN depth student with the teacher's prop encoder and action-head width."""
 
-    latent_spec_class = NaiveStudentLatentSpec
+    latent_spec_class = VanillaStudentLatentSpec
 
 
 def _prop_encoder(input_dim: int, cfg: dict[str, Any]) -> tuple[int, nn.Module]:

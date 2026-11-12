@@ -6,6 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "proof_parkour"
 version = "0.0.1"
 description = "LocoLab external project."
+license = { text = "BSD-3-Clause" }
 requires-python = ">=3.10"
 dependencies = [
     "locolab",
@@ -14,6 +15,9 @@ dependencies = [
 
 [project.entry-points."locolab.tasks"]
 proof_parkour = "proof_parkour.tasks"
+
+[tool.setuptools]
+license-files = ["LICENSE"]
 
 [tool.setuptools.packages.find]
 where = ["."]

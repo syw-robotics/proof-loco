@@ -14,7 +14,7 @@ class ProofHeightmapParkourPPORunnerCfg(ZRlOnPolicyRunnerCfg):
     """PROOF heightmap teacher.
 
     Same GroupMLP encoder, LayerNorm, observation normalization, and optimizer as the
-    naive heightmap policy. ``exterio_mask`` is a scalar flag that multiplies the
+    vanilla heightmap policy. ``exterio_mask`` is a scalar flag that multiplies the
     heightmap latent. The leading latent entries match privileged linear velocity.
     """
 

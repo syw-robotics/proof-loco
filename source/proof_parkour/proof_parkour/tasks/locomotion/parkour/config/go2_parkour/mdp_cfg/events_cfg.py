@@ -160,7 +160,7 @@ class ExterioMaskEventCfg(EventCfg):
 
 
 @configclass
-class NaiveVisionEventCfg(EventCfg):
+class VanillaVisionEventCfg(EventCfg):
     """Parkour events plus depth-camera mounting noise.
 
     Depth corruption is not in this camera pipeline, so this does not apply the

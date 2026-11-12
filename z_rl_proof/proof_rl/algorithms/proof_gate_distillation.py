@@ -75,6 +75,7 @@ class ProofGateDistillation(Distillation):
             )
 
     def act(self, obs: TensorDict) -> torch.Tensor:
+        # Collecting tracher's action during warmup
         if self.num_updates < self.latent_warmup_iterations:
             # warmup uses teacher to rollout
             self.student(obs, stochastic_output=False, force_open_gate=True)

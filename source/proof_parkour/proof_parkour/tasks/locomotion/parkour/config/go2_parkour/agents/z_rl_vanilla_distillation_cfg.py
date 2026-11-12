@@ -6,16 +6,16 @@ from z_rl.adaptor.isaaclab import (
     ZRlDistillationRunnerCfg,
 )
 
-from .z_rl_naive_ppo_cfg import NaiveHeightmapParkourPPORunnerCfg
+from .z_rl_vanilla_ppo_cfg import VanillaHeightmapParkourPPORunnerCfg
 
-_TEACHER_ACTOR = NaiveHeightmapParkourPPORunnerCfg().actor
+_TEACHER_ACTOR = VanillaHeightmapParkourPPORunnerCfg().actor
 
 
 @configclass
-class NaiveStudentDistillationAlgorithmCfg(ZRlDistillationAlgorithmCfg):
+class VanillaStudentDistillationAlgorithmCfg(ZRlDistillationAlgorithmCfg):
     """Distill actions, with an optional freeze of the prop encoder and a heightmap-slot warmup."""
 
-    class_name: str = "proof_rl.algorithms.naive_student_distillation:NaiveStudentDistillation"
+    class_name: str = "proof_rl.algorithms.vanilla_student_distillation:VanillaStudentDistillation"
     """The algorithm class name."""
 
     frozen_prop_encoder: bool = False
@@ -38,8 +38,8 @@ class NaiveStudentDistillationAlgorithmCfg(ZRlDistillationAlgorithmCfg):
 
 
 @configclass
-class NaiveVisionParkourDistillationRunnerCfg(ZRlDistillationRunnerCfg):
-    """Distill the naive heightmap teacher into a depth student.
+class VanillaVisionParkourDistillationRunnerCfg(ZRlDistillationRunnerCfg):
+    """Distill the vanilla heightmap teacher into a depth student.
 
     The student latent is ``[prop_encoder, depth_cnn, last_prop]``. The prop encoder
     matches the teacher, and the CNN width matches the teacher's heightmap latent, so
@@ -55,19 +55,19 @@ class NaiveVisionParkourDistillationRunnerCfg(ZRlDistillationRunnerCfg):
     num_steps_per_env = 24
     max_iterations = 6000
     save_interval = 500
-    experiment_name = "parkour_naive_vision_distill"
+    experiment_name = "parkour_vanilla_vision_distill"
     obs_groups = {
         "student": ["prop", "depth_image"],
         "teacher": ["prop", "heightmap"],
     }
     student = ZRlComposableModelCfg(
-        class_name="proof_rl.models.naive_student_vision_model:NaiveStudentVisionModel",
+        class_name="proof_rl.models.vanilla_student_vision_model:VanillaStudentVisionModel",
         hidden_dims=[512, 256, 128],
         activation="elu",
         obs_normalization=False,
         init_weights=0.01,
         latent_spec={
-            "class_name": "proof_rl.models.naive_student_vision_model:NaiveStudentLatentSpec",
+            "class_name": "proof_rl.models.vanilla_student_vision_model:VanillaStudentLatentSpec",
             "image_obs_group": "depth_image",
             "prop_obs_group": "prop",
             "prop_encoder_cfg": dict(_TEACHER_ACTOR.encoder_cfgs["prop"]),
@@ -90,7 +90,7 @@ class NaiveVisionParkourDistillationRunnerCfg(ZRlDistillationRunnerCfg):
         },
     )
     teacher = _TEACHER_ACTOR.copy()
-    algorithm = NaiveStudentDistillationAlgorithmCfg(
+    algorithm = VanillaStudentDistillationAlgorithmCfg(
         num_learning_epochs=5,
         learning_rate=1.0e-4,
         gradient_length=24,

@@ -17,7 +17,7 @@ JOINT_NAMES = [
 from .actions_cfg import ActionsCfg
 from .commands_cfg import ParkourCommandsCfg
 from .curriculumns_cfg import ParkourCurriculumsCfg
-from .events_cfg import EventCfg, ExterioMaskEventCfg, NaiveVisionEventCfg, VisionEventCfg
+from .events_cfg import EventCfg, ExterioMaskEventCfg, VanillaVisionEventCfg, VisionEventCfg
 from .observations_cfg import (
     PrivObsCfg,
     PropObsCfg,
@@ -34,7 +34,7 @@ __all__ = [
     "ParkourCommandsCfg",
     "EventCfg",
     "ExterioMaskEventCfg",
-    "NaiveVisionEventCfg",
+    "VanillaVisionEventCfg",
     "VisionEventCfg",
     "ParkourCurriculumsCfg",
     "ParkourRewardsCfg",

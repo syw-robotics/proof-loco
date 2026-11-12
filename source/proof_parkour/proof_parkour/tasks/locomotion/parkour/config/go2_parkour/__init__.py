@@ -5,11 +5,11 @@ from locolab.utils.gym_registration import register_manager_based_rl_env
 
 # ---------- Heightmap Teacher Policy ----------
 register_manager_based_rl_env(
-    task_id="Naive-Heightmap-Parkour-PPO-Go2",
-    env_cfg_module="proof_parkour.tasks.locomotion.parkour.config.naive_heightmap_parkour_env_cfg",
-    env_cfg_name="NaiveHeightmapParkourGo2EnvCfg",
+    task_id="Vanilla-Heightmap-Parkour-PPO-Go2",
+    env_cfg_module="proof_parkour.tasks.locomotion.parkour.config.vanilla_heightmap_parkour_env_cfg",
+    env_cfg_name="VanillaHeightmapParkourGo2EnvCfg",
     agent_cfg_entry_points={
-        "z_rl_cfg_entry_point": f"{agents.__name__}.z_rl_naive_ppo_cfg:NaiveHeightmapParkourPPORunnerCfg",
+        "z_rl_cfg_entry_point": f"{agents.__name__}.z_rl_vanilla_ppo_cfg:VanillaHeightmapParkourPPORunnerCfg",
     },
 )
 
@@ -24,11 +24,11 @@ register_manager_based_rl_env(
 
 # ---------- Depth Vision Student Policy ----------
 register_manager_based_rl_env(
-    task_id="Naive-Vision-Parkour-Distill-Go2",
-    env_cfg_module="proof_parkour.tasks.locomotion.parkour.config.naive_vision_parkour_env_cfg",
-    env_cfg_name="NaiveVisionParkourGo2EnvCfg",
+    task_id="Vanilla-Vision-Parkour-Distill-Go2",
+    env_cfg_module="proof_parkour.tasks.locomotion.parkour.config.vanilla_vision_parkour_env_cfg",
+    env_cfg_name="VanillaVisionParkourGo2EnvCfg",
     agent_cfg_entry_points={
-        "z_rl_cfg_entry_point": f"{agents.__name__}.z_rl_naive_distillation_cfg:NaiveVisionParkourDistillationRunnerCfg",
+        "z_rl_cfg_entry_point": f"{agents.__name__}.z_rl_vanilla_distillation_cfg:VanillaVisionParkourDistillationRunnerCfg",
     },
 )
 
@@ -41,11 +41,11 @@ register_manager_based_rl_env(
     },
 )
 
-register_manager_based_rl_env(
-    task_id="Proof-Vision-RSSM-Parkour-Distill-Go2",
-    env_cfg_module="proof_parkour.tasks.locomotion.parkour.config.proof_vision_parkour_env_cfg",
-    env_cfg_name="ProofVisionParkourGo2EnvCfg",
-    agent_cfg_entry_points={
-        "z_rl_cfg_entry_point": f"{agents.__name__}.z_rl_proof_rssm_distillation_cfg:ProofRSSMVisionParkourDistillationRunnerCfg",
-    },
-)
+# register_manager_based_rl_env(
+#     task_id="Proof-Vision-RSSM-Parkour-Distill-Go2",
+#     env_cfg_module="proof_parkour.tasks.locomotion.parkour.config.proof_vision_parkour_env_cfg",
+#     env_cfg_name="ProofVisionParkourGo2EnvCfg",
+#     agent_cfg_entry_points={
+#         "z_rl_cfg_entry_point": f"{agents.__name__}.z_rl_proof_rssm_distillation_cfg:ProofRSSMVisionParkourDistillationRunnerCfg",
+#     },
+# )

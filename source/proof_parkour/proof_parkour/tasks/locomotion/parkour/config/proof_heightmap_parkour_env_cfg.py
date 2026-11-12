@@ -1,6 +1,6 @@
 """PROOF heightmap parkour environment.
 
-Inherits the naive heightmap scene and MDP, then adds the exterio-latent mask.
+Inherits the vanilla heightmap scene and MDP, then adds the exterio-latent mask.
 """
 
 from isaaclab.sensors import RayCasterCfg
@@ -9,10 +9,10 @@ from isaaclab.utils import configclass
 from proof_parkour.assets.sensors import BLIND_HEIGHT_SCAN_RAY_CASTER_MARKER_CFG, BlindHeightmapRayCaster
 
 from .go2_parkour.mdp_cfg import ExterioMaskEventCfg, ExterioMaskObsCfg
-from .naive_heightmap_parkour_env_cfg import (
+from .vanilla_heightmap_parkour_env_cfg import (
     Go2ParkourSceneCfg,
-    NaiveHeightmapObservationsCfg,
-    NaiveHeightmapParkourGo2EnvCfg,
+    VanillaHeightmapObservationsCfg,
+    VanillaHeightmapParkourGo2EnvCfg,
 )
 
 
@@ -20,8 +20,8 @@ from .naive_heightmap_parkour_env_cfg import (
 # MDP definition
 ##
 @configclass
-class ProofHeightmapObservationsCfg(NaiveHeightmapObservationsCfg):
-    """Naive observations plus the episode-level exterio latent mask."""
+class ProofHeightmapObservationsCfg(VanillaHeightmapObservationsCfg):
+    """Vanilla observations plus the episode-level exterio latent mask."""
 
     exterio_mask: ExterioMaskObsCfg = ExterioMaskObsCfg()
 
@@ -43,7 +43,7 @@ class ProofHeightmapSceneCfg(Go2ParkourSceneCfg):
 # Environment configuration
 ##
 @configclass
-class ProofHeightmapParkourGo2EnvCfg(NaiveHeightmapParkourGo2EnvCfg):
+class ProofHeightmapParkourGo2EnvCfg(VanillaHeightmapParkourGo2EnvCfg):
     """PROOF heightmap teacher environment.
 
     The actor receives ``prop``, ``heightmap``, and ``exterio_mask``. On non-parkour
