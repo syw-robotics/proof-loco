@@ -1,3 +1,4 @@
+
 <h1 align="center">PROOF: <u>P</u>erceptive <u>R</u>obustness via <u>O</u>ut-<u>o</u>f-Distribution <u>F</u>allback for Legged Locomotion</h1>
 
 <p align="center"><b>Conference on Robot Learning (CoRL) 2026</b></p>
@@ -5,7 +6,7 @@
 <div align="center">
 
 [[Website]](https://syw-robotics.github.io/proof-loco/)
-[[arXiv]](https://arxiv.org/abs/2606.28476)
+[[arXiv]](https://arxiv.org/abs/2611.xxxx)
 [[Online Demo]](https://syw-robotics.github.io/proof-loco/#interactive-demo)
 
 <img src="./assets/sustech-tsinghua-hkustgz-pcl.png" height="60"/>
@@ -23,7 +24,7 @@
 
 
 
-### Description
+## 🔈 Description
 
 Considering Isaaclab has upgraded, this is a later re-implementation with:
 
@@ -32,13 +33,13 @@ Considering Isaaclab has upgraded, this is a later re-implementation with:
 
 Additional features includes: muon optimizer, symmetry augmentation, more comprehensive terrains, student estimation warmup ...
 
-### 📝 Todo List
+## 📝 Todo List
 
 - [x] Release training code
 - [ ] Release deployment code
 
 
-### ⚙️ Installation
+## ⚙️ Installation
 
 Install [Isaac Lab 3.0](https://github.com/isaac-sim/IsaacLab), [LocoLab](https://github.com/syw-robotics/LocoLab), [Z_RL](https://github.com/syw-robotics/z_rl) and this repo:
 
@@ -82,7 +83,7 @@ cd ~/<directory-you-like>/proof-loco
 ```
 
 
-#### Registered tasks
+### Registered tasks
 
 - `Proof-Heightmap-Parkour-PPO-Go2`: Proof teacher with mlp encoders
 - `Proof-Vision-Parkour-Distill-Go2`: Proof student with cnn + gru for exteroceptive estimation
@@ -91,15 +92,16 @@ cd ~/<directory-you-like>/proof-loco
 <!-- - `Proof-Vision-RSSM-Parkour-Distill-Go2`: PROOF depth student using RSSM posterior-mean memory and a tanh terrain readout -->
 
 
-### 🚀 Train & Play
+## 🚀 Train & Play
 
+https://github.com/user-attachments/assets/67360460-62ea-4179-aa0b-fae6efbb37e4
 
 **🚧 `newton_mjwarp` is not yet as stable as `physx` for multi terrain locomotion (maybe mujoco 4.0 is better ?)**
 **🚧 Make sure using `physx` please, although it is much slower**
 
 <br>
 
-#### 1. PROOF Heightmap MLP Teacher Policy
+### 1. PROOF Heightmap MLP Teacher Policy
 
 - Pretrain on normal terrains as a warmup:
 ```bash
@@ -127,7 +129,7 @@ python scripts/z_rl/play.py --task Proof-Heightmap-Parkour-PPO-Go2 --physics ovp
     - Append `--info` or `--verbose` to see more terminal logs during program init
 
 
-#### 2. PROOF Vision GRU-CNN Student Policy
+### 2. PROOF Vision GRU-CNN Student Policy
 
 **If student training or playing failed, see [Troubleshooting 1](#1-cudacudnn-library-conflicts-or-slow-cnn-initialization).**
 
@@ -150,20 +152,21 @@ python scripts/z_rl/play.py --task Proof-Vision-Parkour-Distill-Go2 --physics ov
 
 
 
-### 💛 Acknowledgement
+## 💛 Acknowledgement
 
 - [IsaacLab](https://github.com/isaac-sim/IsaacLab) and [rsl_rl](https://github.com/leggedrobotics/rsl_rl)
 
 - [InstinctLab](https://github.com/project-instinct/InstinctLab) for its camera obs pipeline and virtual obstacle implementation
 
 
-### 🐛 Troubleshooting
+## 🐛 Troubleshooting
 
-#### 1. CUDA/cuDNN library conflicts or slow CNN initialization
+### 1. CUDA/cuDNN library conflicts or slow CNN initialization
 
 If student training encounters CUDA/cuDNN library conflicts or excessive convolution initialization time with dynamic batch sizes, activate your virtual environment and run the following in the same terminal before launching training or playback.
 
 ```bash
+# Your uv env
 export CURRENT_PY_ENV_SITE="$(python -c 'import sysconfig; print(sysconfig.get_path("purelib"))')"
 
 # Prioritize the current virtual environment's cuDNN and CUDA 13 libraries.
@@ -174,7 +177,7 @@ export TORCH_CUDNN_V8_API_DISABLED=1
 ```
 
 
-### 📖 Citation
+## 📖 Citation
 
 If you find this project useful, please consider citing:
 
