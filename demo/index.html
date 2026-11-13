@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#dde3e6" />
+    <title>Go2 Perceptive Locomotion</title>
+    <meta
+      name="description"
+      content="Interactive browser demo of the Go2 proof_loco policy running in MuJoCo."
+    />
+    <script src="./gzip-loader.js"></script>
+    <script type="module" src="./main.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BLbzsTcl.css">
+  </head>
+  <body>
+    <main id="app">
+      <canvas id="scene" aria-label="Interactive MuJoCo simulation"></canvas>
+
+      <section class="depth-view glass" aria-label="Policy depth observation">
+        <div class="sensor-head">
+          <span>DEPTH PREVIEW</span>
+        </div>
+        <canvas id="depth" width="44" height="23"></canvas>
+      </section>
+
+      <section id="gateView" class="gate-view glass" aria-label="Policy gate plot">
+        <div class="gate-head">
+          <div><span>GATE VALUE</span><output id="gateScore">--</output></div>
+          <label class="plot-switch" title="Show or hide gate plot">
+            <input id="gatePlotToggle" type="checkbox" role="switch" aria-label="Show gate plot" />
+            <span aria-hidden="true"></span>
+          </label>
+        </div>
+        <div class="gate-plot-body">
+          <canvas id="gatePlot" width="448" height="224" aria-label="Smoothed policy gate score history"></canvas>
+        </div>
+      </section>
+
+      <section class="spawn-selector glass" aria-label="Initial position">
+        <span class="spawn-title">START ON</span>
+        <div id="spawnOptions" class="spawn-options" role="group" aria-label="Initial position options"></div>
+      </section>
+
+      <div class="control-cluster">
+        <aside id="controlTip" class="control-tip glass" aria-label="Control tips">
+          <p style="margin-bottom: 6px;"><strong>KEYBOARD</strong> <kbd>WASD</kbd> move <span aria-hidden="true">&middot;</span> <kbd>Q/E</kbd> turn</p>
+          <p><strong>PARKOUR</strong> Hold <kbd>W</kbd> and face obstacles straight on</p>
+        </aside>
+
+        <section class="control-deck glass" aria-label="Simulation controls">
+          <div class="motion-stack">
+            <div class="velocity-panel" aria-label="Velocity command">
+              <div class="velocity-values">
+                <div><span>VX</span><output id="commandVx">+0.00</output></div>
+                <div><span>VY</span><output id="commandVy">+0.00</output></div>
+                <div><span>WZ</span><output id="commandWz">+0.00</output></div>
+              </div>
+            </div>
+            <div class="motion-controls" aria-label="Velocity command">
+              <button class="key key-w" data-key="w" aria-label="Forward velocity">W</button>
+              <button class="key key-a" data-key="a" aria-label="Left velocity">A</button>
+              <button class="key key-s" data-key="s" aria-label="Stop forward velocity">S</button>
+              <button class="key key-d" data-key="d" aria-label="Right velocity">D</button>
+              <button class="key key-q" data-key="q" aria-label="Turn left">Q</button>
+              <button class="key key-e" data-key="e" aria-label="Turn right">E</button>
+            </div>
+          </div>
+          <div class="deck-divider" aria-hidden="true"></div>
+          <div class="action-controls">
+            <div class="key-with-label">
+              <button id="corruptionButton" class="key" title="Toggle random depth corruption" aria-describedby="corruptionMeta">P</button>
+              <small id="corruptionMeta" class="corruption-meta" aria-live="polite">
+                <span id="corruptionName">Apply visual corruption</span>
+                <span id="corruptionExposure" class="corruption-exposure" hidden>
+                  <i aria-hidden="true"></i><span id="corruptionExposureText"></span>
+                </span>
+              </small>
+            </div>
+            <div class="key-with-label">
+              <button id="resetButton" class="key" title="Reset simulation" aria-label="Reset simulation">R</button>
+              <small>Reset</small>
+            </div>
+            <div class="key-with-label">
+              <button id="pauseButton" class="icon-button" title="Pause simulation" aria-label="Pause simulation">
+                <span id="pauseIcon" aria-hidden="true">&#10074;&#10074;</span>
+              </button>
+              <small>Space</small>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div id="sleep" hidden>
+        <strong>Sleeping</strong>
+        <span>Click here to resume</span>
+      </div>
+
+      <div id="boot" role="status" aria-live="polite">
+        <div id="bootMessage">Reading deployment manifest</div>
+        <div class="progress"><i id="bootProgress"></i></div>
+        <div id="bootDetail">unitree-deploy-camera</div>
+      </div>
+    </main>
+  </body>
+</html>
