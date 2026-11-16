@@ -1,0 +1,29 @@
+{
+  "source_urdf": "/home/syw/.gitrepos/proof-loco/source/proof_parkour/proof_parkour/assets/robots/unitree/Go2/urdf/go2_description/urdf/go2_description_with_camera_30_bottom_collision.urdf",
+  "urdf_sha256": "6f5941d9d4fb8dfeae580254d3bfceed33b549f2479c91da5c24a1268e1ce9c2",
+  "training_cache": "/home/syw/.gitrepos/proof-loco/source/proof_parkour/proof_parkour/assets/robots/unitree/Go2/urdf/go2_description/urdf/.locolab_usd_cache/c168555d7a33d98f/model.xml",
+  "assetx_matches_training_cache": true,
+  "mass_kg": 16.189999999999998,
+  "joints": [
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint",
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint"
+  ],
+  "changes_for_web": [
+    "terrain include",
+    "depth camera and IMU site",
+    "12 torque motors and joint force limits at 30 Nm, matching training actuator config",
+    "home keyframe with training joint angles",
+    "foot contact dimension 3, other contacts 1, nominal friction 1",
+    "relative mesh paths and renderer manifest"
+  ]
+}

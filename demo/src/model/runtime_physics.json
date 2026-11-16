@@ -1,0 +1,25 @@
+{
+  "actuator": "native position",
+  "integrator": "implicitfast",
+  "kp": 25,
+  "kd": 0.5,
+  "force_limit_nm": 30,
+  "target_position_clip_rad": [
+    -10,
+    10
+  ],
+  "joint_velocity_limit_rad_s": 30,
+  "armature_kg_m2": 0.001,
+  "joint_frictionloss_nm": 0.05,
+  "foot_solref": [
+    0.005,
+    1
+  ],
+  "physics_hz": 500,
+  "policy_hz": 50,
+  "camera_hz": 20,
+  "depth_history_skip_frames": 2,
+  "policy_weights_changed": false,
+  "terrain_changed": false,
+  "visuals": "original DAE geometry and material colors, split to OBJ"
+}

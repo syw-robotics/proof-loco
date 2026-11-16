@@ -1,0 +1,14 @@
+{
+  "source_dae": {
+    "base": "/home/syw/.gitrepos/proof-loco/source/proof_parkour/proof_parkour/assets/robots/unitree/Go2/urdf/go2_description/dae/base.dae",
+    "calf": "/home/syw/.gitrepos/proof-loco/source/proof_parkour/proof_parkour/assets/robots/unitree/Go2/urdf/go2_description/dae/calf.dae",
+    "calf_mirror": "/home/syw/.gitrepos/proof-loco/source/proof_parkour/proof_parkour/assets/robots/unitree/Go2/urdf/go2_description/dae/calf_mirror.dae",
+    "foot": "/home/syw/.gitrepos/proof-loco/source/proof_parkour/proof_parkour/assets/robots/unitree/Go2/urdf/go2_description/dae/foot.dae",
+    "hip": "/home/syw/.gitrepos/proof-loco/source/proof_parkour/proof_parkour/assets/robots/unitree/Go2/urdf/go2_description/dae/hip.dae",
+    "thigh": "/home/syw/.gitrepos/proof-loco/source/proof_parkour/proof_parkour/assets/robots/unitree/Go2/urdf/go2_description/dae/thigh.dae",
+    "thigh_mirror": "/home/syw/.gitrepos/proof-loco/source/proof_parkour/proof_parkour/assets/robots/unitree/Go2/urdf/go2_description/dae/thigh_mirror.dae"
+  },
+  "mesh_parts": 17,
+  "visual_instances": 34,
+  "physics_unchanged": true
+}

@@ -1,0 +1,1376 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-11T18:52:53.991Z",
+  "source": {
+    "demo": "config/demo.yaml",
+    "policy": "config/policies/proof_loco/policy_v2-hard-gate.yaml",
+    "sensor": "config/policies/proof_loco/sensor_depth_camera.yaml",
+    "robot": "config/robots/go2/go2.xml",
+    "terrain": "config/terrains/parkour_terrain.xml"
+  },
+  "robot": {
+    "name": "go2",
+    "terrain": "parkour",
+    "modelUrl": "src/model/model.xml",
+    "modelFiles": [
+      {
+        "path": "model.xml",
+        "url": "src/model/model.xml"
+      },
+      {
+        "path": "terrain.xml",
+        "url": "src/model/terrain.xml"
+      }
+    ],
+    "assetBaseUrl": "src/model/assets/",
+    "meshes": [
+      {
+        "name": "dae_base_0",
+        "file": "dae_base_0.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_base_1",
+        "file": "dae_base_1.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_base_2",
+        "file": "dae_base_2.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_base_3",
+        "file": "dae_base_3.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_base_4",
+        "file": "dae_base_4.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_calf_0",
+        "file": "dae_calf_0.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_calf_1",
+        "file": "dae_calf_1.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_calf_mirror_0",
+        "file": "dae_calf_mirror_0.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_calf_mirror_1",
+        "file": "dae_calf_mirror_1.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_foot_0",
+        "file": "dae_foot_0.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_hip_0",
+        "file": "dae_hip_0.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_hip_1",
+        "file": "dae_hip_1.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_thigh_0",
+        "file": "dae_thigh_0.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_thigh_1",
+        "file": "dae_thigh_1.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_thigh_mirror_0",
+        "file": "dae_thigh_mirror_0.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "dae_thigh_mirror_1",
+        "file": "dae_thigh_mirror_1.obj",
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "cam_rack_2_30",
+        "file": "cam_rack_2_30.stl",
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    ],
+    "visuals": [
+      {
+        "body": "base",
+        "mesh": "dae_base_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "base",
+        "mesh": "dae_base_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "body": "base",
+        "mesh": "dae_base_2",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.009018,
+          0.009018,
+          0.009018,
+          1.0
+        ]
+      },
+      {
+        "body": "base",
+        "mesh": "dae_base_3",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.01341,
+          0.01341,
+          0.01341,
+          1.0
+        ]
+      },
+      {
+        "body": "base",
+        "mesh": "dae_base_4",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.023455,
+          0.023455,
+          0.023455,
+          1.0
+        ]
+      },
+      {
+        "body": "base",
+        "mesh": "cam_rack_2_30",
+        "pos": [
+          0.286,
+          0.0,
+          0.081
+        ],
+        "quat": [
+          -0.499999,
+          -0.499999,
+          0.500001,
+          0.500001
+        ],
+        "rgba": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "body": "FL_hip",
+        "mesh": "dae_hip_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "FL_hip",
+        "mesh": "dae_hip_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.9,
+          0.95,
+          0.95,
+          1.0
+        ]
+      },
+      {
+        "body": "FL_thigh",
+        "mesh": "dae_thigh_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "FL_thigh",
+        "mesh": "dae_thigh_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.9,
+          0.95,
+          0.95,
+          1.0
+        ]
+      },
+      {
+        "body": "FL_calf",
+        "mesh": "dae_calf_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "body": "FL_calf",
+        "mesh": "dae_calf_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "FL_foot",
+        "mesh": "dae_foot_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "body": "FR_hip",
+        "mesh": "dae_hip_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          4.63268e-05,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "FR_hip",
+        "mesh": "dae_hip_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          4.63268e-05,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.9,
+          0.95,
+          0.95,
+          1.0
+        ]
+      },
+      {
+        "body": "FR_thigh",
+        "mesh": "dae_thigh_mirror_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "FR_thigh",
+        "mesh": "dae_thigh_mirror_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.9,
+          0.95,
+          0.95,
+          1.0
+        ]
+      },
+      {
+        "body": "FR_calf",
+        "mesh": "dae_calf_mirror_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "body": "FR_calf",
+        "mesh": "dae_calf_mirror_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "FR_foot",
+        "mesh": "dae_foot_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "body": "RL_hip",
+        "mesh": "dae_hip_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          4.63268e-05,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "RL_hip",
+        "mesh": "dae_hip_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          4.63268e-05,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "rgba": [
+          0.9,
+          0.95,
+          0.95,
+          1.0
+        ]
+      },
+      {
+        "body": "RL_thigh",
+        "mesh": "dae_thigh_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "RL_thigh",
+        "mesh": "dae_thigh_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.9,
+          0.95,
+          0.95,
+          1.0
+        ]
+      },
+      {
+        "body": "RL_calf",
+        "mesh": "dae_calf_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "body": "RL_calf",
+        "mesh": "dae_calf_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "RL_foot",
+        "mesh": "dae_foot_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "body": "RR_hip",
+        "mesh": "dae_hip_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          2.14617e-09,
+          4.63268e-05,
+          4.63268e-05,
+          -1.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "RR_hip",
+        "mesh": "dae_hip_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          2.14617e-09,
+          4.63268e-05,
+          4.63268e-05,
+          -1.0
+        ],
+        "rgba": [
+          0.9,
+          0.95,
+          0.95,
+          1.0
+        ]
+      },
+      {
+        "body": "RR_thigh",
+        "mesh": "dae_thigh_mirror_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "RR_thigh",
+        "mesh": "dae_thigh_mirror_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.9,
+          0.95,
+          0.95,
+          1.0
+        ]
+      },
+      {
+        "body": "RR_calf",
+        "mesh": "dae_calf_mirror_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "body": "RR_calf",
+        "mesh": "dae_calf_mirror_1",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.6717055,
+          0.6924257,
+          0.7742702,
+          1.0
+        ]
+      },
+      {
+        "body": "RR_foot",
+        "mesh": "dae_foot_0",
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quat": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rgba": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      }
+    ],
+    "jointNames": [
+      "FR_hip_joint",
+      "FR_thigh_joint",
+      "FR_calf_joint",
+      "FL_hip_joint",
+      "FL_thigh_joint",
+      "FL_calf_joint",
+      "RR_hip_joint",
+      "RR_thigh_joint",
+      "RR_calf_joint",
+      "RL_hip_joint",
+      "RL_thigh_joint",
+      "RL_calf_joint"
+    ],
+    "sdkJointNames": [
+      "FR_hip_joint",
+      "FR_thigh_joint",
+      "FR_calf_joint",
+      "FL_hip_joint",
+      "FL_thigh_joint",
+      "FL_calf_joint",
+      "RR_hip_joint",
+      "RR_thigh_joint",
+      "RR_calf_joint",
+      "RL_hip_joint",
+      "RL_thigh_joint",
+      "RL_calf_joint"
+    ],
+    "actionJointNames": [
+      "FR_hip_joint",
+      "FR_thigh_joint",
+      "FR_calf_joint",
+      "FL_hip_joint",
+      "FL_thigh_joint",
+      "FL_calf_joint",
+      "RR_hip_joint",
+      "RR_thigh_joint",
+      "RR_calf_joint",
+      "RL_hip_joint",
+      "RL_thigh_joint",
+      "RL_calf_joint"
+    ],
+    "defaultQpos": [
+      -0.1,
+      0.8,
+      -1.5,
+      0.1,
+      0.8,
+      -1.5,
+      -0.1,
+      1,
+      -1.5,
+      0.1,
+      1,
+      -1.5
+    ],
+    "actionScale": [
+      0.125,
+      0.25,
+      0.25,
+      0.125,
+      0.25,
+      0.25,
+      0.125,
+      0.25,
+      0.25,
+      0.125,
+      0.25,
+      0.25
+    ],
+    "kpPolicy": [
+      25,
+      25,
+      25,
+      25,
+      25,
+      25,
+      25,
+      25,
+      25,
+      25,
+      25,
+      25
+    ],
+    "kdPolicy": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "kpFixedStand": [
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50
+    ],
+    "kdFixedStand": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "maxTorque": [
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30
+    ],
+    "maxVelocity": 30,
+    "baseBody": "base",
+    "cameraName": "depth_camera",
+    "gyroSensorNames": [
+      "imu_ang_vel",
+      "imu_gyro"
+    ],
+    "actuatorMode": "position"
+  },
+  "timing": {
+    "policyStepDt": 0.02,
+    "declaredPhysicsDt": 0.002,
+    "declaredDecimation": 10,
+    "simulationHz": 500,
+    "effectivePhysicsDt": 0.002,
+    "effectiveSubsteps": 10,
+    "cameraUpdateRate": 10,
+    "cameraIntervalSteps": 50
+  },
+  "spawnPoints": {
+    "default": "hurdles_high_platform",
+    "options": [
+      {
+        "id": "stairs_slopes",
+        "label": "Stairs and slopes",
+        "description": "Stairs: 30 \u00d7 16 cm | Slope: 30\u00b0",
+        "position": [
+          0,
+          3,
+          0.4
+        ],
+        "yaw": 0
+      },
+      {
+        "id": "hurdles_high_platform",
+        "label": "High platforms & Hurdles",
+        "description": "Platforms: 50 - 70 cm | Hurdles: 25 - 35 cm",
+        "position": [
+          0,
+          0,
+          0.4
+        ],
+        "yaw": 0
+      },
+      {
+        "id": "gaps",
+        "label": "Gaps",
+        "description": "Gap width: 50\u201380 cm",
+        "position": [
+          1.6,
+          -3.3,
+          0.9
+        ],
+        "yaw": 0
+      }
+    ]
+  },
+  "policy": {
+    "actorUrl": "src/policy/actor.onnx",
+    "encoderUrl": "src/policy/depth_encoder.onnx",
+    "gateHoldUrl": null,
+    "actorInputName": "obs",
+    "actionOutputName": "actions",
+    "depthInputName": "depth_image",
+    "depthOutputName": "depth_image_latent",
+    "actionDim": 12,
+    "actionToJointIndices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "obsUseScaledPrevAction": false,
+    "obsPrimeOnReset": true,
+    "rawActionClip": null,
+    "targetQClip": [
+      -100,
+      100
+    ],
+    "gate": {
+      "mode": "policy",
+      "initialOpen": false,
+      "decimation": 1,
+      "value": 1
+    },
+    "gatePlot": {
+      "enabled": true,
+      "history": 500,
+      "updateInterval": 5
+    }
+  },
+  "observation": {
+    "concatMode": "term_major",
+    "propSize": 450,
+    "depth": {
+      "type": "depth",
+      "history_len": 2,
+      "params": {
+        "height": 23,
+        "width": 44,
+        "history_skip_frames": 1,
+        "shared_memory_name": "unitree_depth_go2_perceptive_locomotion"
+      },
+      "frameSize": 1012,
+      "vectorSize": 2024
+    },
+    "observations": [
+      {
+        "type": "base_ang_vel",
+        "history_len": 10,
+        "scale": 0.25,
+        "baseDim": 3,
+        "vectorSize": 30
+      },
+      {
+        "type": "projected_gravity",
+        "history_len": 10,
+        "baseDim": 3,
+        "vectorSize": 30
+      },
+      {
+        "type": "command",
+        "history_len": 10,
+        "command_range": [
+          [
+            -0.5,
+            0.8
+          ],
+          [
+            -0.5,
+            0.5
+          ],
+          [
+            -1.2,
+            1.2
+          ]
+        ],
+        "baseDim": 3,
+        "vectorSize": 30
+      },
+      {
+        "type": "joint_pos_rel",
+        "history_len": 10,
+        "baseDim": 12,
+        "vectorSize": 120
+      },
+      {
+        "type": "joint_vel",
+        "history_len": 10,
+        "scale": 0.05,
+        "baseDim": 12,
+        "vectorSize": 120
+      },
+      {
+        "type": "prev_action",
+        "history_len": 10,
+        "clip": [
+          -10,
+          10
+        ],
+        "baseDim": 12,
+        "vectorSize": 120
+      },
+      {
+        "type": "depth",
+        "history_len": 2,
+        "params": {
+          "height": 23,
+          "width": 44,
+          "history_skip_frames": 1,
+          "shared_memory_name": "unitree_depth_go2_perceptive_locomotion"
+        },
+        "frameSize": 1012,
+        "vectorSize": 2024
+      }
+    ]
+  },
+  "camera": {
+    "type": "depth",
+    "source": "mujoco",
+    "name": "depth_camera",
+    "attach_body": "base_link",
+    "shared_memory_name": "unitree_depth_go2_perceptive_locomotion",
+    "update_rate": 10,
+    "transform": {
+      "position": [
+        0.335,
+        0.015,
+        0.088
+      ],
+      "rpy": [
+        60,
+        0,
+        -90
+      ],
+      "degrees": true,
+      "quaternion": [
+        0.6123724356957946,
+        0.35355339059327373,
+        -0.3535533905932737,
+        -0.6123724356957945
+      ]
+    },
+    "intrinsics": {
+      "width": 48,
+      "height": 27,
+      "fovx": 87,
+      "fovy": 58,
+      "render_scale": 2,
+      "near": 0.1,
+      "far": 2
+    },
+    "preprocessing": {
+      "crop": {
+        "top": 2,
+        "bottom": 2,
+        "left": 2,
+        "right": 2
+      },
+      "gaussian_blur": {
+        "kernel_size": 3,
+        "sigma": 1
+      },
+      "clip_range": [
+        0.1,
+        2
+      ],
+      "normalize_mode": "clip_scale",
+      "fill_invalid": 2
+    },
+    "ood_injection": "depth_corruption.yaml",
+    "outputHeight": 23,
+    "outputWidth": 44
+  },
+  "corruption": {
+    "enabled": true,
+    "key": "p",
+    "patterns": [
+      "local_reflection",
+      "random_stripe",
+      "patch_mask",
+      "full_mask",
+      "gaussian_noise",
+      "pepper_salt"
+    ],
+    "pattern_weights": {
+      "local_reflection": 1,
+      "random_stripe": 1,
+      "patch_mask": 1,
+      "full_mask": 1,
+      "gaussian_noise": 1,
+      "pepper_salt": 1
+    },
+    "training_exposure": {
+      "local_reflection": "unseen",
+      "random_stripe": "unseen",
+      "patch_mask": "seen",
+      "full_mask": "seen",
+      "gaussian_noise": "seen",
+      "pepper_salt": "unseen"
+    },
+    "frame_probability": 0.8,
+    "seed": 0,
+    "output_range": [
+      0,
+      1
+    ],
+    "local_reflection": {
+      "patch_count_range": [
+        1,
+        3
+      ],
+      "height_range": [
+        3,
+        8
+      ],
+      "width_range": [
+        4,
+        12
+      ],
+      "value_choices": [
+        0,
+        1
+      ]
+    },
+    "random_stripe": {
+      "stripe_count_range": [
+        1,
+        2
+      ],
+      "width_range": [
+        2,
+        6
+      ],
+      "offset_fraction": 0.6,
+      "value_range": [
+        0,
+        1
+      ]
+    },
+    "patch_mask": {
+      "artifacts_prob": 0.02,
+      "max_blocks": 3,
+      "height_mean_std": [
+        8,
+        2
+      ],
+      "width_mean_std": [
+        8,
+        2
+      ],
+      "value_choices": [
+        0,
+        1
+      ]
+    },
+    "full_mask": {
+      "value_choices": [
+        0,
+        1
+      ]
+    },
+    "gaussian_noise": {
+      "mean": 0,
+      "std": 0.5
+    },
+    "pepper_salt": {
+      "ratio": 0.05,
+      "salt_ratio": 0.5
+    }
+  }
+}
