@@ -94,7 +94,11 @@ cd ~/<directory-you-like>/proof-loco
 
 ## 🚀 Train & Play
 
-https://github.com/user-attachments/assets/67360460-62ea-4179-aa0b-fae6efbb37e4
+
+
+https://github.com/user-attachments/assets/e9bedff1-a38e-41ad-8b9a-14969fff6c33
+
+
 
 **🚧 `newton_mjwarp` is not yet as stable as `physx` for multi terrain locomotion (maybe mujoco 4.0 is better ?)**
 **🚧 Make sure using `physx` please, although it is much slower**
