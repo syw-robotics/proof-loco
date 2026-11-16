@@ -17,11 +17,11 @@ class ParkourTerminationsCfg:
     # bad_orientation is a better substitute to illegal_contact, in case of not training fall-recovery behavior
     bad_orientation = DoneTerm(func=mdp.bad_orientation, params={"limit_angle": 1.5})  # about 85 degrees
 
-    # Only robots on the highest-difficulty row are terminated for leaving the map.
+    # Terminate 4 m beyond the terrain grid, excluding its surrounding border.
     # Marked as a timeout so leaving the terrain does not count as a failure.
     terrain_out_of_bounds = DoneTerm(
         func=mdp.terrain_out_of_bounds,
-        params={"asset_cfg": SceneEntityCfg("robot"), "distance_buffer": 3.0},
+        params={"asset_cfg": SceneEntityCfg("robot"), "out_of_bounds_distance": 4.0},
         time_out=True,
     )
 

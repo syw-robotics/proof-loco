@@ -34,7 +34,7 @@ class EventCfg:
         mode="startup",
         params={
             "asset_cfg": SceneEntityCfg("robot", body_names=BASE_LINK_NAME),
-            "mass_distribution_params": (-1.0, 1.5),
+            "mass_distribution_params": (-1.5, 1.5),
             "operation": "add",
             "recompute_inertia": True,
         },

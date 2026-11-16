@@ -6,7 +6,7 @@
 <div align="center">
 
 [[Website]](https://syw-robotics.github.io/proof-loco/)
-[[arXiv]](https://arxiv.org/abs/2611.xxxx)
+[[arXiv]](https://arxiv.org/pdf/2611.18305)
 [[Online Demo]](https://syw-robotics.github.io/proof-loco/#interactive-demo)
 
 <img src="./assets/sustech-tsinghua-hkustgz-pcl.png" height="60"/>
