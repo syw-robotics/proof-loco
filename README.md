@@ -74,7 +74,7 @@ bash LocoLab/install.sh "$PWD/IsaacLab" "$PWD/z_rl"
 
 # Install this repo's packages
 cd proof-loco
-uv pip install -e source/proof_parkour -e z_rl_proof
+uv pip install -e source/proof_parkour -e source/z_rl_proof
 
 
 # For later sessions
