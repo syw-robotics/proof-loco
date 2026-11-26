@@ -56,7 +56,7 @@ mkdir -p ~/<directory-you-like>
 cd ~/<directory-you-like>
 
 
-# Clone dependencies and PROOF.
+# Clone dependencies and PROOF, make sure to use the latest main branch of the below repos
 git clone --branch main https://github.com/isaac-sim/IsaacLab.git
 git clone https://github.com/syw-robotics/LocoLab.git
 git clone https://github.com/syw-robotics/z_rl.git

@@ -195,7 +195,12 @@ class VanillaHeightmapParkourGo2EnvCfg(ManagerBasedRLEnvCfg):
         self.sim.dt = 0.005
         self.sim.render_interval = self.decimation
         self.sim.physics_material = self.scene.terrain.physics_material
-        set_locomotion_physics(self.sim, rigid_patch_count=10 * 2**15)
+        set_locomotion_physics(
+            self.sim,
+            physx=dict(rigid_patch_count=10 * 2**15),
+            mjwarp=dict(cone="elliptic", impratio=5.0, njmax=128, nconmax=24),
+            steel=dict(margin=0.002, articulation_constraint_max=192, update_mass_matrix_interval=2),
+        )
         # update sensor update periods
         # we tick all the sensors based on the smallest update period (physics update period)
         self.scene.contact_forces.update_period = self.sim.dt
